@@ -1,1 +1,38 @@
-p Hello, Sinatra!
+header
+  .container-fluid.bg-white.py-3
+    .d-flex.justify-content-center.align-items-center
+      .me-2.logo
+        img.w-100.h-100 src="/img/camera.svg" alt="camera"
+      div
+        h1.mt-1 oksanaleyn.ph
+  .container
+    .about.p-3.bg-white.d-flex.justify-content-start.align-items-top
+      .ava.mx-3.flex-shrink-1
+        img.w-100.h-100.rounded-circle src="/img/ava.jpeg"
+      .description
+        h4.mb-3 Заглавие
+        p Привет, бла бла бла. Бла бла бла бла бла бла. Бла бла бла, бла бла, бла бла бла. Бла бла бла бла бла бла
+    
+    .catalogs
+      .catalog-title 
+        h2 Название каталога
+      #carouselIndicators.carousel.slide data-bs-ride="carousel" data-bs-interval="10000"
+        .carousel-indicators
+          button.active aria-current="true" aria-label=("Slide 1") data-bs-slide-to="0" data-bs-target="#carouselIndicators" type="button" 
+          button aria-label=("Slide 2") data-bs-slide-to="1" data-bs-target="#carouselIndicators" type="button" 
+          button aria-label=("Slide 3") data-bs-slide-to="2" data-bs-target="#carouselIndicators" type="button" 
+        .carousel-inner
+          .carousel-item.active
+            img.d-block.w-100 alt="..." src="/img/photos/first.jpg" /
+          .carousel-item
+            img.d-block.w-100 alt="..." src="/img/photos/first.jpg" /
+          .carousel-item
+            img.d-block.w-100 alt="..." src="/img/photos/first.jpg" /
+        button.carousel-control-prev data-bs-slide="prev" data-bs-target="#carouselIndicators" type="button" 
+          span.carousel-control-prev-icon aria-hidden="true" 
+          span.visually-hidden Previous
+        button.carousel-control-next data-bs-slide="next" data-bs-target="#carouselIndicators" type="button" 
+          span.carousel-control-next-icon aria-hidden="true" 
+          span.visually-hidden Next
+
+  
