@@ -12,56 +12,16 @@ header.container-fluid.bg-white.py-3
       h4.mb-3 Заглавие
       p Привет, бла бла бла. Бла бла бла бла бла бла. Бла бла бла, бла бла, бла бла бла. Бла бла бла бла бла бла
   .ftco-section
-    .row
-      .col-md-12.text-center
-        h2.heading-section.mt-5.mb-3 Каталог фотографий
-      .col-md-12
-        .featured-carousel.owl-carousel
-          .item
-            img.d-block.w-100 alt="..." src="/img/photos/first.jpg" /
-          .item
-            img.d-block.w-100 alt="..." src="/img/photos/first.jpg" /
-          .item
-            img.d-block.w-100 alt="..." src="/img/photos/first.jpg" /
-          .item
-            img.d-block.w-100 alt="..." src="/img/photos/first.jpg" /
-          .item
-            img.d-block.w-100 alt="..." src="/img/photos/first.jpg" /
-          .item
-            img.d-block.w-100 alt="..." src="/img/photos/first.jpg" /
-          .item
-            img.d-block.w-100 alt="..." src="/img/photos/first.jpg" /
-          .item
-            img.d-block.w-100 alt="..." src="/img/photos/first.jpg" /
-          .item
-            img.d-block.w-100 alt="..." src="/img/photos/first.jpg" /
-          .item
-            img.d-block.w-100 alt="..." src="/img/photos/first.jpg" /
-    .row
-      .col-md-12.text-center
-        h2.heading-section.mt-5.mb-3 Каталог фотографий
-      .col-md-12
-        .featured-carousel.owl-carousel
-          .item
-            img.d-block.w-100 alt="..." src="/img/photos/first.jpg" /
-          .item
-            img.d-block.w-100 alt="..." src="/img/photos/first.jpg" /
-          .item
-            img.d-block.w-100 alt="..." src="/img/photos/first.jpg" /
-          .item
-            img.d-block.w-100 alt="..." src="/img/photos/first.jpg" /
-          .item
-            img.d-block.w-100 alt="..." src="/img/photos/first.jpg" /
-          .item
-            img.d-block.w-100 alt="..." src="/img/photos/first.jpg" /
-          .item
-            img.d-block.w-100 alt="..." src="/img/photos/first.jpg" /
-          .item
-            img.d-block.w-100 alt="..." src="/img/photos/first.jpg" /
-          .item
-            img.d-block.w-100 alt="..." src="/img/photos/first.jpg" /
-          .item
-            img.d-block.w-100 alt="..." src="/img/photos/first.jpg" /
+    - @categories.each do |category|
+      .row
+        .col-md-12.text-center
+          h2.heading-section.mt-5.mb-3 #{category.name}
+        .col-md-12
+          .featured-carousel.owl-carousel
+            - category.photos.sort_by(&:priority).each do |photo|
+              .item
+                img.d-block.w-100 alt="..." src=photo.link /
+
 footer.text-center.py-5
   a.mx-2 href="sample.html"
     img src="img/instagram.svg" width="50" height="50" alt="Пример"

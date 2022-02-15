@@ -13,18 +13,23 @@ end
 unless DB.tables.include?(:photos)
   DB.create_table :photos do
     primary_key :id
-    Integer :category_id
+    Integer :category_id, null: false
     Integer :priority, default: 0
     String :link
   end
 end
 
-def photos_by_category_id(id)
-  DB['select * from photos where category_id = ?', id]
+unless DB.tables.include?(:settings)
+  DB.create_table :settings do
+    primary_key :id
+    String :title
+    String :description_title
+    String :description
+    String :telegram_link
+    String :instagram_link
+    String :vk_link
+    String :avatar
+  end
 end
 
-def set_priority(table:, priority:, id:)
-  return if [table, priority, id].any?(&:nil?)
-
-  DB["update #{table} set priority = #{priority} where #{table}.id = #{id}"]
-end
+Dir["./model/*.rb"].each {|file| require file }

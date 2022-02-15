@@ -7,20 +7,11 @@ require_relative 'db/actions_with_db'
 
 enable :sessions
 set :password, ENV['PASSWORD']
-set :home, '/' # where user should be redirected after successful authentication
+set :hpme, '/admin' # where user should be redirected after successful authentication
 
-categories = DB[:categories]
-
-# get "/:name" do
-#   use Rack::Auth::Basic, "Restricted Area" do |username, password|
-#     [username, password] == ['admin', 'admin']  
-#   end
-#   "Hello, #{params[:name]}!"
-# end
-
-get '/' do 
+get '/' do
+  @categories = Category.order(:priority).all
   slim :index
-  # categories.first[:name]
 end
 
 get '/login/?' do
@@ -35,12 +26,8 @@ after_reload do
   puts 'reloaded'
 end
 
-before '/admin/*' do
+before '/admin/?' do
   protected!
-end
-
-get '/admin' do
-  redirect '/admin/*'
 end
 
 post '/admin/categories/:id/add_image' do
