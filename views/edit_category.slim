@@ -1,0 +1,40 @@
+.d-flex.flex-row
+    a.btn.btn-success.me-1 href='/'
+      | Главная
+    a.btn.btn-secondary href='/admin'
+      | Настройки
+.container
+  h2.mb-5 Редактирование категории
+  form.mb-5 action="/edit_category/#{@category.id}" method='post'
+    label.me-3 for='name' Название:
+    input.me-3 type='text' name='name' required=true value=@category.name
+    label.me-3 for='priority' Приоритет:
+    input.me-3 type="number" name='priority' value='0'
+    input.btn.btn-success type='submit' value='Обновить'
+  - if @category.photos.any?
+    h4 Фотографии категории
+    table
+      tr
+        th Фото
+        th Приоритет
+        th Удалить
+      - @category.photos.each do |photo|
+        tr
+          td
+            img width='100' height='100' src=photo.link
+          td photo.priority
+            form action='/update_photo/#{photo.id}' method='post'
+              input.me-3 type="number" name='priority' value=photo.priority
+              input.btn.btn-success type='submit' value='Обновить'
+
+          td 
+            form action='/delete_photo/#{photo.id}' method='delete'
+              input.btn.btn-danger type='submit' value='Удалить'
+  - else
+    | Нет загруженных фотографий в данной категории
+  h4.mt-5 Добавить новую фотографию
+  form.mb-5 action="/category/#{@category.id}/add_photo" method='post' enctype='multipart/form-data'
+    label.me-3 for='priority' Приоритет:
+    input.me-3 type="number" name='priority' value='0'
+    input type="file" name="photo"
+    input.btn.btn-dark type='submit' value='Загрузить'

@@ -28,7 +28,6 @@ unless DB.tables.include?(:settings)
     String :telegram_link
     String :instagram_link
     String :vk_link
-    String :avatar
   end
 end
 

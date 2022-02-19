@@ -1,56 +1,77 @@
-.mb-5 
-  h2 Категории
-  - if @categories.any?
-    table.table align='center'
-      thead.thead-dark
-        tr
-          th Название категории
-          th Приоритет
-          th Количество фотографий
-          th Редактировать
-      tbody
-        tr
+a.btn.btn-secondary href='/'
+    | На главную
+.container
+  h1.mb-5 align='center' Настройки
+  .mb-5 
+    h2 Категории
+    - if @categories.any?
+      table.table align='center'
+        thead.thead-dark
+          tr
+            th Название категории
+            th Приоритет
+            th Количество фотографий
+            th Редактировать
+        tbody
           - @categories.each do |category|
-            td = category[:name]
-            td = category[:priority]
-            td = category.photos.count
-            td align='left'
-              a href="/admin/category/#{category[:id]}"
-                img src="img/pencil-square.svg" width="30" height="30" alt="Редактировать"
-  - else
-    p Не создано ни одной категории
+            tr
+              td = category[:name]
+              td = category[:priority]
+              td = category.photos.count
+              td align='left'
+                a href="/admin/category/#{category[:id]}"
+                  img src="img/pencil-square.svg" width="30" height="30" alt="Редактировать"
+    - else
+      p Не создано ни одной категории
+  h5.mt-3 Создать новую категорию
+  form action='/create_category' method='post'
+    label.me-3 for='category_title' Название:
+    input.me-3 type='text' name='category_title' required=true
+    label.me-3 for='category_priority' Приоритет:
+    input.me-3 type="number" name='category_priority' value='0'
+    input type='submit' value='Создать'
+  hr.my-5
 
-h2 Настройки
-form action="" method="post"
-  fieldset
-    table
-      tr
-        td
-          label.me-5 for='title' Название:
-        td
-          input type='text' name='title'
-      tr
-        td
-          label.me-5 for='description_title' Оглавление описания:
-        td
-          input type='text' name='description_title'
-      tr
-        td
-          label.me-5 for='description' Описание:
-        td
-          textarea name='description'
-      tr
-        td
-          label.me-5 for='telegram_link' Ссылка на телеграм:
-        td
-          input type='text' name='telegram_link'
-      tr
-        td
-          label.me-5 for='instagram_link' Ссылка на инстаграм:
-        td
-          input type='text' name='instagram_link'
-      tr
-        td
-          label.me-5 for='vk_link' Ссылка на вконтакте:
-        td
-          input type='text' name='vk_link'
+  h2 Настройки
+  form action="/preferences" method="post"
+    fieldset
+      table
+        tr
+          td
+            label.me-5 for='title' Название:
+          td
+            input type='text' name='title' value=@settings&.title
+        tr
+          td
+            label.me-5 for='description_title' Оглавление описания:
+          td
+            input type='text' name='description_title' value=@settings&.description_title
+        tr
+          td
+            label.me-5 for='description' Описание:
+          td
+            textarea.w-100 name='description'
+              | #{@settings&.description}
+        tr
+          td
+            label.me-5 for='telegram_link' Ссылка на телеграм:
+          td
+            input type='text' name='telegram_link' value=@settings&.telegram_link
+        tr
+          td
+            label.me-5 for='instagram_link' Ссылка на инстаграм:
+          td
+            input type='text' name='instagram_link' value=@settings&.instagram_link
+        tr
+          td
+            label.me-5 for='vk_link' Ссылка на вконтакте:
+          td
+            input type='text' name='vk_link' value=@settings&.vk_link
+    input type='submit' value='Сохранить'
+  hr
+  div Аватарка:
+  img width='100' height='100' src='img/ava.jpeg?#{Time.now.to_i}'
+  p Заменить:
+  form.mb-5 action='/ava_upload' method='post' enctype='multipart/form-data'
+    input type="file" name="avatar"
+    input type='submit' value='Загрузить'

@@ -1,17 +1,22 @@
-def upload_photo(file:, category_id:)
-  filename = params[:file][:filename]
-  file = params[:file][:tempfile]
-  
+def upload_photo(file)
   new_filename = set_new_name
 
-  File.open("../public/img/photos#{@filename}", 'wb') do |f|
+  link = "#{settings.public_folder}/img/photos/#{@new_filename}"
+  File.open(link, 'wb') do |f|
+    f.write(file.read)
+  end
+  link
+end
+
+def upload_ava(file)
+  File.open("#{settings.public_folder}/img/ava.jpeg", 'wb') do |f|
     f.write(file.read)
   end
 end
 
 def set_new_name
   i = 1
-  directory = Dir.open('../public/img/photos')
+  directory = Dir.open("#{settings.public_folder}/img/photos")
   new_name = 'photo'
 
   if directory.include?(new_name)

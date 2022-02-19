@@ -1,3 +1,10 @@
+- if @admin
+  .d-flex.flex-row-reverse
+    form action="/logout" method="post"
+      input.btn.btn-danger type='submit' value='Выйти'
+    a.btn.btn-success.me-1 href='/admin'
+      | Настройки
+  
 header.container-fluid.bg-white.py-3
   .d-flex.justify-content-center.align-items-center
     .me-2.logo
@@ -7,7 +14,7 @@ header.container-fluid.bg-white.py-3
 .container
   .about.p-3.bg-white.d-flex.justify-content-start.align-items-top
     .ava.mx-3.flex-shrink-1
-      img.w-100.h-100.rounded-circle src="/img/ava.jpeg"
+      img.w-100.h-100.rounded-circle src="/img/ava.jpeg?#{Time.now.to_i}"
     .description
       h4.mb-3 Заглавие
       p Привет, бла бла бла. Бла бла бла бла бла бла. Бла бла бла, бла бла, бла бла бла. Бла бла бла бла бла бла
