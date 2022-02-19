@@ -7,15 +7,27 @@ require_relative 'db/actions_with_db'
 
 enable :sessions
 set :password, ENV['PASSWORD']
-set :hpme, '/admin' # where user should be redirected after successful authentication
+set :home, '/admin' # where user should be redirected after successful authentication
 
 get '/' do
   @categories = Category.order(:priority).all
   slim :index
 end
 
-get '/login/?' do
-  'login here'
+post '/login' do
+  params
+end
+
+get '/login' do
+  if params[:password].nil?
+    slim :login
+  else
+    auth!(params[:password])
+  end
+end
+
+get '/admin' do
+  slim :admin
 end
 
 not_found do
