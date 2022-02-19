@@ -27,6 +27,7 @@ get '/login' do
 end
 
 get '/admin' do
+  @categories = Category.all
   slim :admin
 end
 

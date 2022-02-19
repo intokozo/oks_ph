@@ -1,1 +1,56 @@
-| Catalogs
+.mb-5 
+  h2 Категории
+  - if @categories.any?
+    table.table align='center'
+      thead.thead-dark
+        tr
+          th Название категории
+          th Приоритет
+          th Количество фотографий
+          th Редактировать
+      tbody
+        tr
+          - @categories.each do |category|
+            td = category[:name]
+            td = category[:priority]
+            td = category.photos.count
+            td align='left'
+              a href="/admin/category/#{category[:id]}"
+                img src="img/pencil-square.svg" width="30" height="30" alt="Редактировать"
+  - else
+    p Не создано ни одной категории
+
+h2 Настройки
+form action="" method="post"
+  fieldset
+    table
+      tr
+        td
+          label.me-5 for='title' Название:
+        td
+          input type='text' name='title'
+      tr
+        td
+          label.me-5 for='description_title' Оглавление описания:
+        td
+          input type='text' name='description_title'
+      tr
+        td
+          label.me-5 for='description' Описание:
+        td
+          textarea name='description'
+      tr
+        td
+          label.me-5 for='telegram_link' Ссылка на телеграм:
+        td
+          input type='text' name='telegram_link'
+      tr
+        td
+          label.me-5 for='instagram_link' Ссылка на инстаграм:
+        td
+          input type='text' name='instagram_link'
+      tr
+        td
+          label.me-5 for='vk_link' Ссылка на вконтакте:
+        td
+          input type='text' name='vk_link'
