@@ -12,6 +12,7 @@ a.btn.btn-secondary href='/'
             th Приоритет
             th Количество фотографий
             th Редактировать
+            th Удалить
         tbody
           - @categories.each do |category|
             tr
@@ -19,12 +20,15 @@ a.btn.btn-secondary href='/'
               td = category[:priority]
               td = category.photos.count
               td align='left'
-                a href="/admin/category/#{category[:id]}"
+                a href='/admin/category/#{category[:id]}'
                   img src="img/pencil-square.svg" width="30" height="30" alt="Редактировать"
+              td align='left'
+                form action="/admin/delete_category/#{category.id}" method='post'
+                  input.btn.btn-danger type='submit' value='Удалить'
     - else
       p Не создано ни одной категории
   h5.mt-3 Создать новую категорию
-  form action='/create_category' method='post'
+  form action='/admin/create_category' method='post'
     label.me-3 for='category_title' Название:
     input.me-3 type='text' name='category_title' required=true
     label.me-3 for='category_priority' Приоритет:
@@ -33,7 +37,7 @@ a.btn.btn-secondary href='/'
   hr.my-5
 
   h2 Настройки
-  form action="/preferences" method="post"
+  form action="/admin/preferences" method="post"
     fieldset
       table
         tr
@@ -72,6 +76,6 @@ a.btn.btn-secondary href='/'
   div Аватарка:
   img width='100' height='100' src='img/ava.jpeg?#{Time.now.to_i}'
   p Заменить:
-  form.mb-5 action='/ava_upload' method='post' enctype='multipart/form-data'
+  form.mb-5 action='/admin/ava_upload' method='post' enctype='multipart/form-data'
     input type="file" name="avatar"
     input type='submit' value='Загрузить'

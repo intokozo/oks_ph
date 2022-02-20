@@ -10,14 +10,14 @@ header.container-fluid.bg-white.py-3
     .me-2.logo
       img.w-100.h-100 src="/img/camera.svg" alt="camera"
     div
-      h1.mt-1 oksanaleyn.ph
+      h1.mt-1 =@settings.title
 .container
   .about.p-3.bg-white.d-flex.justify-content-start.align-items-top
     .ava.mx-3.flex-shrink-1
       img.w-100.h-100.rounded-circle src="/img/ava.jpeg?#{Time.now.to_i}"
     .description
-      h4.mb-3 Заглавие
-      p Привет, бла бла бла. Бла бла бла бла бла бла. Бла бла бла, бла бла, бла бла бла. Бла бла бла бла бла бла
+      h4.mb-3 =@settings.description_title
+      p =@settings.description
   .ftco-section
     - @categories.each do |category|
       .row
@@ -27,13 +27,13 @@ header.container-fluid.bg-white.py-3
           .featured-carousel.owl-carousel
             - category.photos.sort_by(&:priority).each do |photo|
               .item
-                img.d-block.w-100 alt="..." src=photo.link /
+                img.d-block.w-100 alt="..." src=photo.url /
 
 footer.text-center.py-5
-  a.mx-2 href="sample.html"
+  a.mx-2 href=@settings.instagram_link
     img src="img/instagram.svg" width="50" height="50" alt="Пример"
-  a.mx-2 href="sample.html"
+  a.mx-2 href=@settings.vk_link
     img src="img/vk.svg" width="50" height="50" alt="Пример"
-  a.mx-2 href="sample.html"
+  a.mx-2 href=@settings.telegram_link
     img src="img/telegram.svg" width="50" height="50" alt="Пример"
      

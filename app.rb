@@ -13,6 +13,7 @@ set :home, '/admin' # where user should be redirected after successful authentic
 get '/' do
   @admin = true if authorized?
   @categories = Category.order(:priority).all
+  @settings = Setting.last
   slim :index
 end
 
@@ -39,7 +40,7 @@ get '/admin/category/:id' do
   slim :edit_category
 end
 
-post '/edit_category/:id' do
+post '/admin/edit_category/:id' do
   @category = Category.find(id: params[:id])
   @category.update(
     name: params[:name],
@@ -48,21 +49,26 @@ post '/edit_category/:id' do
   redirect '/admin'
 end
 
-post '/update_photo/:id' do
+post '/admin/delete_category/:id' do
+  Category.find(id: params[:id]).destroy
+  redirect '/admin'
+end
+
+post '/admin/category/:category_id/update_photo/:id' do
   @photo = Photo.find(id: params[:id])
   @photo.update(
     priority: params[:priority]
   )
-  redirect '/admin'
+  redirect "/admin/category/#{params[:category_id]}"
 end
 
-delete '/delete_photo/:id' do
+post '/admin/category/:category_id/delete_photo/:id' do
   @photo = Photo.find(id: params[:id])
-  @photo.delete
-  redirect '/admin'
+  @photo.destroy
+  redirect "/admin/category/#{params[:category_id]}"
 end
 
-post "/category/:id/add_photo" do
+post "/admin/category/:id/add_photo" do
   unless params[:photo] && params[:photo][:tempfile]
     @error = "No file selected"
     redirect '/admin'
@@ -75,10 +81,10 @@ post "/category/:id/add_photo" do
     priority: params[:priority],
     link: link
   )
-  redirect '/admin'
+  redirect "/admin/category/#{params[:id]}"
 end
 
-post '/preferences' do
+post '/admin/preferences' do
   setting = Setting.empty? ? Setting.new : Setting.last
   setting.update(
     title: params[:title],
@@ -91,7 +97,7 @@ post '/preferences' do
   redirect '/admin'
 end
 
-post '/ava_upload' do
+post '/admin/ava_upload' do
   unless params[:avatar] && params[:avatar][:tempfile]
     @error = "No file selected"
     redirect '/admin'
@@ -100,7 +106,7 @@ post '/ava_upload' do
   redirect '/admin'
 end
 
-post '/create_category' do
+post '/admin/create_category' do
   Category.create(
     name: params[:category_title],
     priority: params[:category_priority]
@@ -120,6 +126,6 @@ before '/admin/?' do
   protected!
 end
 
-post '/admin/categories/:id/add_image' do
-  
+before '/admin/*' do
+  protected!
 end
