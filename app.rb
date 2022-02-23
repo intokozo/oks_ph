@@ -54,11 +54,14 @@ post '/admin/delete_category/:id' do
   redirect '/admin'
 end
 
-post '/admin/category/:category_id/update_photo/:id' do
-  @photo = Photo.find(id: params[:id])
-  @photo.update(
-    priority: params[:priority]
-  )
+post '/admin/update_photos' do
+  params.each do |photo|
+    next if photo[0] == 'category_id'
+
+    photo_params = photo[1]
+    Photo.find(id: photo_params[:id]).update(priority: photo_params[:priority])
+  end
+
   redirect "/admin/category/#{params[:category_id]}"
 end
 

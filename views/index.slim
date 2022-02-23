@@ -14,7 +14,7 @@ header.container-fluid.bg-white.py-3
 .container
   .about.p-3.bg-white.d-flex.justify-content-start.align-items-top
     .ava.mx-3.flex-shrink-1
-      img.w-100.h-100.rounded-circle src="/img/ava.jpeg?#{Time.now.to_i}"
+      img.w-100.h-100.rounded-circle src="/img/ava.jpeg?#{rand}"
     .description
       h4.mb-3 =@settings.description_title
       p =@settings.description
@@ -27,7 +27,7 @@ header.container-fluid.bg-white.py-3
           .featured-carousel.owl-carousel
             - category.photos.sort_by(&:priority).each do |photo|
               .item
-                img.d-block.w-100 alt="..." src=photo.url /
+                img.d-block.w-100 alt="..." src="#{photo.url}?#{photo.id}" /
 
 footer.text-center.py-5
   a.mx-2 href=@settings.instagram_link

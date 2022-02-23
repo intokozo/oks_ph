@@ -13,23 +13,26 @@
     input.btn.btn-success type='submit' value='Обновить'
   - if @category.photos.any?
     h4 Фотографии категории
-    table
-      tr
-        th Фото
-        th Приоритет
-        th Удалить
-      - @category.photos.each do |photo|
+    form id='photos_update' action="/admin/update_photos" method='post'
+      table
         tr
-          td
-            img height='100' src="/#{photo.url}"
-          td
-            form action="/admin/category/#{@category.id}/update_photo/#{photo.id}" method='post'
-              input.me-3 type="number" name='priority' value=photo.priority
-              input.btn.btn-success type='submit' value='Обновить'
+          th Фото
+          th Приоритет
+          th Удалить
+        - @category.photos.sort_by(&:priority).each do |photo|
+          tr
+            td
+              img height='100' src="/#{photo.url}?#{photo.id}"
+            td
+              input form='photos_update' type='hidden' name="photo#{photo.id}[id]" value=photo.id
+              input.me-3 form='photos_update' type="number" name='photo#{photo.id}[priority]' value=photo.priority
 
-          td 
-            form action="/admin/category/#{@category.id}/delete_photo/#{photo.id}" method='post'
-              input.btn.btn-danger type='submit' value='Удалить'
+            td 
+              form id='photo_del' action="/admin/category/#{@category.id}/delete_photo/#{photo.id}" method='post'
+                input.btn.btn-danger form='photo_del' type='submit' value='Удалить'
+      input form='photos_update' type='hidden' name="category_id" value=@category.id
+      input.btn.btn-success.mt-3 form='photos_update' type='submit' value='Обновить приоритеты'
+
   - else
     | Нет загруженных фотографий в данной категории
   h4.mt-5 Добавить новую фотографию
