@@ -21,7 +21,7 @@
       - @category.photos.each do |photo|
         tr
           td
-            img width='100' height='100' src="/#{photo.url}"
+            img height='100' src="/#{photo.url}"
           td
             form action="/admin/category/#{@category.id}/update_photo/#{photo.id}" method='post'
               input.me-3 type="number" name='priority' value=photo.priority

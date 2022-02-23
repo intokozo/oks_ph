@@ -14,6 +14,10 @@
   max-width: 700px;
 }
 
+.nav-button {
+  width: 40px;
+}
+
 
 .owl-carousel {
   position: relative; }
@@ -68,9 +72,9 @@
   .owl-carousel:hover .owl-nav .owl-next {
     opacity: 1; }
   .owl-carousel:hover .owl-nav .owl-prev {
-    left: -25px; }
+    left: -30px; }
   .owl-carousel:hover .owl-nav .owl-next {
-    right: -25px; }
+    right: -30px; }
 
 .owl-carousel.owl-drag .owl-item {
   -ms-touch-action: pan-y;

@@ -21,7 +21,7 @@
 	    dots: true,
 	    autoplayHoverPause: false,
 	    items: 1,
-	    navText : ["<span class='ion-ios-arrow-back'></span>","<span class='ion-ios-arrow-forward'></span>"],
+	    navText : ["<img class='nav-button' alt='back' src='/img/chevron-back.svg'>","<img class='nav-button' alt='forward' src='/img/chevron-forward.svg'>"],
 	    responsive:{
 	      0:{
 	        items:1
