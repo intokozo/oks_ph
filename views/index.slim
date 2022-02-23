@@ -16,13 +16,13 @@ header.container-fluid.bg-white.py-3
     .ava.mx-3.flex-shrink-1
       img.w-100.h-100.rounded-circle src="/img/ava.jpeg?#{rand}"
     .description
-      h4.mb-3 =@settings.description_title
-      p =@settings.description
+      h4.mb-3.desc-title-font =@settings.description_title
+      p.desc-text-font =@settings.description
   .ftco-section
     - @categories.each do |category|
       .row
         .col-md-12.text-center
-          h2.heading-section.mt-5.mb-3 #{category.name}
+          h2.heading-section.mt-5.mb-3.category-font #{category.name}
         .col-md-12
           .featured-carousel.owl-carousel
             - category.photos.sort_by(&:priority).each do |photo|
