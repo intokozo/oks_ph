@@ -123,10 +123,6 @@ not_found do
   'This is nowhere to be found.'
 end
 
-after_reload do
-  puts 'reloaded'
-end
-
 before '/admin/?' do
   protected!
 end
