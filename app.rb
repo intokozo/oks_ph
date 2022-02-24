@@ -11,9 +11,11 @@ set :password, ENV['PASSWORD']
 set :home, '/admin' # where user should be redirected after successful authentication
 
 get '/' do
+  @settings = Setting.last
+  redirect '/admin' if @settings.nil?
+
   @admin = true if authorized?
   @categories = Category.order(:priority).all
-  @settings = Setting.last
   slim :index
 end
 

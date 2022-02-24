@@ -16,8 +16,8 @@ header.container-fluid.bg-white.py-3
     .ava.mx-3.flex-shrink-1
       img.w-100.h-100.rounded-circle src="/img/ava.jpeg?#{rand}"
     .description
-      h4.mb-3.desc-title-font =@settings.description_title
-      p.desc-text-font =@settings.description
+      h4.mb-3.desc-title-font = @settings.description_title
+      p.desc-text-font = @settings.description
   .ftco-section
     - @categories.each do |category|
       .row
