@@ -1,6 +1,6 @@
 require 'sequel'
 
-DB = Sequel.connect('sqlite://db/database.sqlite')
+DB = Sequel.connect("postgres://#{ENV['DB_LOGIN']}:#{ENV['DB_PASSWORD']}@localhost/photobase")
 
 unless DB.tables.include?(:categories)
   DB.create_table :categories do
