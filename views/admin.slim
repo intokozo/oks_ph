@@ -44,17 +44,17 @@ a.btn.btn-secondary href='/'
           td
             label.me-5 for='title' Название:
           td
-            input type='text' name='title' value=@settings&.title
+            input type='text' name='title' value=@settings&.title required=true
         tr
           td
             label.me-5 for='description_title' Оглавление описания:
           td
-            input type='text' name='description_title' value=@settings&.description_title
+            input type='text' name='description_title' value=@settings&.description_title required=true
         tr
           td
             label.me-5 for='description' Описание:
           td
-            textarea.w-100 name='description'
+            textarea.w-100 name='description' required=true
               | #{@settings&.description}
         tr
           td

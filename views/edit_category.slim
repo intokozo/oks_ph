@@ -22,7 +22,7 @@
         - @category.photos.sort_by(&:priority).each do |photo|
           tr
             td
-              img height='100' src="/#{photo.url}?#{photo.id}"
+              img height='100' src="#{photo.file.url}"
             td
               input form='photos_update' type='hidden' name="photo#{photo.id}[id]" value=photo.id
               input.me-3 form='photos_update' type="number" name='photo#{photo.id}[priority]' value=photo.priority

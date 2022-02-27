@@ -3,8 +3,8 @@ require 'sinatra'
 require 'slim'
 require 'sinatra/simple_auth'
 require 'sinatra/reloader' if development?
-require_relative 'db/actions_with_db'
 require_relative 'uploaders/photo_uploader'
+require_relative 'db/actions_with_db'
 
 enable :sessions
 set :password, ENV['PASSWORD']
@@ -57,10 +57,10 @@ post '/admin/delete_category/:id' do
 end
 
 post '/admin/update_photos' do
-  params.each do |photo|
-    next if photo[0] == 'category_id'
+  params.each do |param|
+    next if param[0] == 'category_id'
 
-    photo_params = photo[1]
+    photo_params = param[1]
     Photo.find(id: photo_params[:id]).update(priority: photo_params[:priority])
   end
 
@@ -78,13 +78,11 @@ post "/admin/category/:id/add_photo" do
     @error = "No file selected"
     redirect '/admin'
   end
-
-  link = upload_photo(params[:photo][:tempfile])
-
+  
   Photo.create(
     category_id: params[:id],
     priority: params[:priority],
-    link: link
+    file: params[:photo][:tempfile]
   )
   redirect "/admin/category/#{params[:id]}"
 end
