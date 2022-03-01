@@ -28,8 +28,8 @@
               input.me-3 form='photos_update' type="number" name='photo#{photo.id}[priority]' value=photo.priority
 
             td 
-              form id='photo_del' action="/admin/category/#{@category.id}/delete_photo/#{photo.id}" method='post'
-                input.btn.btn-danger form='photo_del' type='submit' value='Удалить'
+              form id='photo_del_#{photo.id}' action="/admin/category/#{@category.id}/delete_photo/#{photo.id}" method='post'
+                input.btn.btn-danger form='photo_del_#{photo.id}' type='submit' value='Удалить'
       input form='photos_update' type='hidden' name="category_id" value=@category.id
       input.btn.btn-success.mt-3 form='photos_update' type='submit' value='Обновить приоритеты'
 
