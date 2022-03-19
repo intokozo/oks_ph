@@ -37,7 +37,5 @@
     | Нет загруженных фотографий в данной категории
   h4.mt-5 Добавить новую фотографию
   form.mb-5 action="/admin/category/#{@category.id}/add_photo" method='post' enctype='multipart/form-data'
-    label.me-3 for='priority' Приоритет:
-    input.me-3 type="number" name='priority' value='0'
-    input type="file" name="photo"
+    input type="file" name="photo[]" multiple=true
     input.btn.btn-dark type='submit' value='Загрузить'

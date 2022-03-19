@@ -74,16 +74,14 @@ post '/admin/category/:category_id/delete_photo/:id' do
 end
 
 post "/admin/category/:id/add_photo" do
-  unless params[:photo] && params[:photo][:tempfile]
-    @error = "No file selected"
-    redirect '/admin'
+  if params[:photo].present?
+    params[:photo].each do |photo|
+      Photo.create(
+        category_id: params[:id],
+        file: photo[:tempfile]
+      )
+    end
   end
-  
-  Photo.create(
-    category_id: params[:id],
-    priority: params[:priority],
-    file: params[:photo][:tempfile]
-  )
   redirect "/admin/category/#{params[:id]}"
 end
 
