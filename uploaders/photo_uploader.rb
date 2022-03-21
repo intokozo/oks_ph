@@ -57,9 +57,9 @@ class PhotoUploader < CarrierWave::Uploader::Base
     'img/photos/'
   end
 
-  def filename
-    "photo-#{Time.now.to_i}"
-  end
+  # def filename
+  #   "photo-#{Time.now.to_i}"
+  # end
 end
 
 def upload_ava(file)
